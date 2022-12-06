@@ -83,7 +83,7 @@ export const PropertyPaneSidebar = memo((props: Props) => {
   useEffect(() => {
     if (!isSnipingMode) {
       //update url hash with the selectedWidget
-      dispatch(appendSelectedWidgetToUrl(selectedWidgetIds));
+      // dispatch(appendSelectedWidgetToUrl(selectedWidgetIds));
       if (selectedWidgetIds.length === 1) {
         quickScrollToWidget(selectedWidgetIds[0]);
       }

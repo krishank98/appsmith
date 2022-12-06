@@ -71,24 +71,14 @@ function MainContainer() {
           onWidthChange={onLeftSidebarWidthChange}
           width={sidebarWidth}
         />
+        <div className="relative flex flex-col w-1/3 overflow-auto">
+          <SentryRoute component={EditorsRouter} />
+        </div>
         <div
-          className="relative flex flex-col w-full overflow-auto"
+          className="relative flex flex-col w-2/3 overflow-auto"
           id="app-body"
         >
-          <Switch key={BUILDER_PATH}>
-            <SentryRoute
-              component={WidgetsEditor}
-              exact
-              path={BUILDER_PATH_DEPRECATED}
-            />
-            <SentryRoute component={WidgetsEditor} exact path={BUILDER_PATH} />
-            <SentryRoute
-              component={WidgetsEditor}
-              exact
-              path={BUILDER_CUSTOM_PATH}
-            />
-            <SentryRoute component={EditorsRouter} />
-          </Switch>
+          <SentryRoute component={WidgetsEditor} />
         </div>
       </Container>
       <BottomBar

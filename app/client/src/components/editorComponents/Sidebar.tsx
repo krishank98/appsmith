@@ -44,7 +44,7 @@ export const EntityExplorerSidebar = memo((props: Props) => {
   const dispatch = useDispatch();
   const active = useSelector(getExplorerActive);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const pinned = useSelector(getExplorerPinned);
+  const pinned = false;
   const isPreviewMode = useSelector(previewModeSelector);
   const enableFirstTimeUserOnboarding = useSelector(
     getIsFirstTimeUserOnboardingEnabled,

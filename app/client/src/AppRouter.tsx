@@ -103,6 +103,7 @@ function AppRouter(props: {
   useEffect(() => {
     AnalyticsUtil.logEvent("ROUTE_CHANGE", { path: window.location.pathname });
     const stopListener = history.listen((location: any) => {
+      debugger;
       AnalyticsUtil.logEvent("ROUTE_CHANGE", { path: location.pathname });
       changeAppBackground(props.currentTheme);
     });
