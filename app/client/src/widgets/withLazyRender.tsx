@@ -14,8 +14,18 @@ export function withLazyRender(Widget: typeof BaseWidget) {
           (entries: IntersectionObserverEntry[]) => {
             if (!!entries.find((entry) => entry.isIntersecting)) {
               setDeferRender(false);
-              wrapperRef.current && observer.unobserve(wrapperRef.current);
+            } else {
+              (window as any).requestIdleCallback(
+                () => {
+                  setDeferRender(false);
+                },
+                {
+                  timeout: 1500,
+                },
+              );
             }
+
+            wrapperRef.current && observer.unobserve(wrapperRef.current);
           },
           {
             root: wrapperRef.current?.closest(".lazy-rendering-root"),
