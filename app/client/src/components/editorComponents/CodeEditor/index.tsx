@@ -109,7 +109,7 @@ import {
 } from "selectors/editorContextSelectors";
 import {
   CodeEditorFocusState,
-  generateKeyAndSetCodeEditorLastFocus,
+  setEditorFieldFocusAction,
 } from "actions/editorContextActions";
 import { updateCustomDef } from "utils/autocomplete/customDefUtils";
 import { shouldFocusOnPropertyControl } from "utils/editorContextUtils";
@@ -423,6 +423,8 @@ class CodeEditor extends Component<Props, State> {
   }, 100);
 
   componentDidUpdate(prevProps: Props): void {
+    const identifierHasChanged =
+      getEditorIdentifier(this.props) !== getEditorIdentifier(prevProps);
     if (
       prevProps.containerHeight &&
       this.props.containerHeight &&
@@ -431,10 +433,7 @@ class CodeEditor extends Component<Props, State> {
       //Refresh editor when the container height is increased.
       this.debounceEditorRefresh();
     }
-    if (
-      getEditorIdentifier(this.props) !== getEditorIdentifier(prevProps) &&
-      shouldFocusOnPropertyControl()
-    ) {
+    if (identifierHasChanged && shouldFocusOnPropertyControl()) {
       setTimeout(() => {
         if (this.props.editorIsFocused) {
           this.editor.focus();
@@ -461,8 +460,15 @@ class CodeEditor extends Component<Props, State> {
          * and not because the editor value has changed
          * */
         if (inputValue !== editorValue && inputValue !== previousInputValue) {
-          this.editor.setValue(inputValue);
-          this.editor.clearHistory(); // when input gets updated on focus out clear undo/redo from codeMirror History
+          // If it is focused update it only if the identifier has changed
+          // if not focused, can be updated
+          if (this.state.isFocused) {
+            if (identifierHasChanged) {
+              this.setEditorInput(inputValue);
+            }
+          } else {
+            this.setEditorInput(inputValue);
+          }
         } else if (prevProps.isEditorHidden && !this.props.isEditorHidden) {
           // Even if Editor is updated with new value, it cannot update without layour calcs.
           //So, if it is hidden it does not reflect in UI, this code is to refresh editor if it was just made visible.
@@ -470,7 +476,7 @@ class CodeEditor extends Component<Props, State> {
         }
       } else if (previousInputValue !== inputValue) {
         // handles case when inputValue changes from a truthy to a falsy value
-        this.editor.setValue("");
+        this.setEditorInput("");
       }
 
       CodeEditor.updateMarkings(
@@ -479,6 +485,12 @@ class CodeEditor extends Component<Props, State> {
         this.props.entitiesForNavigation,
       );
     });
+  }
+
+  setEditorInput(value: string) {
+    this.editor.setValue(value);
+    // when input gets updated on focus out clear undo/redo from codeMirror History
+    this.editor.clearHistory();
   }
 
   handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -598,18 +610,16 @@ class CodeEditor extends Component<Props, State> {
 
   handleClick = (cm: CodeMirror.Editor, event: MouseEvent) => {
     const entityInfo = this.getEntityInformation();
-
-    // Event targets are html elements that have node methods
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    if (event.target.hasAttribute(NAVIGATE_TO_ATTRIBUTE)) {
+    if (
+      event.target instanceof Element &&
+      event.target.hasAttribute(NAVIGATE_TO_ATTRIBUTE)
+    ) {
       if (event.ctrlKey || event.metaKey) {
-        // Event targets are html elements that have node methods
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        const entityToNavigate = event.target.attributes.getNamedItem(
+        const navigationAttribute = event.target.attributes.getNamedItem(
           NAVIGATE_TO_ATTRIBUTE,
-        ).value;
+        );
+        if (!navigationAttribute) return;
+        const entityToNavigate = navigationAttribute.value;
 
         // focus out of the input
         document.body.focus();
@@ -1166,7 +1176,7 @@ const mapDispatchToProps = (dispatch: any) => ({
     dispatch(executeCommandAction(payload)),
   startingEntityUpdate: () => dispatch(startingEntityUpdate()),
   setCodeEditorLastFocus: (payload: CodeEditorFocusState) =>
-    dispatch(generateKeyAndSetCodeEditorLastFocus(payload)),
+    dispatch(setEditorFieldFocusAction(payload)),
   selectWidget: (widgetId: string) =>
     dispatch(selectWidgetInitAction(widgetId, false)),
 });
