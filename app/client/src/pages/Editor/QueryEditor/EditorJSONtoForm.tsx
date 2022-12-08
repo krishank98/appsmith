@@ -968,34 +968,6 @@ export function EditorJSONtoForm(props: Props) {
               name={currentActionConfig ? currentActionConfig.name : ""}
               pageId={pageId}
             />
-            <SearchSnippet
-              className="search-snippets"
-              entityId={currentActionConfig?.id}
-              entityType={ENTITY_TYPE.ACTION}
-              onClick={() => {
-                dispatch(
-                  executeCommandAction({
-                    actionType: SlashCommand.NEW_SNIPPET,
-                    args: {
-                      entityId: currentActionConfig?.id,
-                      entityType: ENTITY_TYPE.ACTION,
-                    },
-                  }),
-                );
-              }}
-            />
-            <DropdownSelect>
-              <DropdownField
-                className={"t--switch-datasource"}
-                components={{ MenuList, Option: CustomOption, SingleValue }}
-                isDisabled={!isChangePermitted}
-                maxMenuHeight={200}
-                name="datasource.id"
-                options={DATASOURCES_OPTIONS}
-                placeholder="Datasource"
-                width={232}
-              />
-            </DropdownSelect>
             <Button
               className="t--run-query"
               data-guided-tour-iid="run-query"
@@ -1154,17 +1126,6 @@ export function EditorJSONtoForm(props: Props) {
               />
             </TabbedViewContainer>
           </SecondaryWrapper>
-          <SidebarWrapper
-            show={(hasDependencies || !!output) && !guidedTourEnabled}
-          >
-            <ActionRightPane
-              actionName={actionName}
-              entityDependencies={entityDependencies}
-              hasConnections={hasDependencies}
-              hasResponse={!!output}
-              suggestedWidgets={executedQueryData?.suggestedWidgets}
-            />
-          </SidebarWrapper>
         </Wrapper>
       </QueryFormContainer>
     </>

@@ -632,11 +632,6 @@ function CommonEditorForm(props: CommonFormPropsWithExtraParams) {
                 name={currentActionConfig ? currentActionConfig.name : ""}
                 pageId={pageId}
               />
-              <SearchSnippet
-                entityId={currentActionConfig?.id}
-                entityType={ENTITY_TYPE.ACTION}
-                onClick={handleSearchSnippetClick}
-              />
               <Button
                 className="t--apiFormRunBtn"
                 disabled={!isExecutePermitted}
@@ -789,16 +784,16 @@ function CommonEditorForm(props: CommonFormPropsWithExtraParams) {
               theme={theme}
             />
           </SecondaryWrapper>
-          <DataSourceList
-            actionName={actionName}
-            applicationId={props.applicationId}
-            currentActionDatasourceId={currentActionDatasourceId}
-            currentPageId={props.currentPageId}
-            datasources={props.datasources}
-            hasResponse={props.hasResponse}
-            onClick={updateDatasource}
-            suggestedWidgets={props.suggestedWidgets}
-          />
+          {/*<DataSourceList*/}
+          {/*  actionName={actionName}*/}
+          {/*  applicationId={props.applicationId}*/}
+          {/*  currentActionDatasourceId={currentActionDatasourceId}*/}
+          {/*  currentPageId={props.currentPageId}*/}
+          {/*  datasources={props.datasources}*/}
+          {/*  hasResponse={props.hasResponse}*/}
+          {/*  onClick={updateDatasource}*/}
+          {/*  suggestedWidgets={props.suggestedWidgets}*/}
+          {/*/>*/}
         </Wrapper>
       </Form>
     </>

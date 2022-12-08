@@ -77,14 +77,7 @@ function CloseEditor() {
     history.push(URL);
   };
 
-  return (
-    <IconContainer className="t--close-editor" onClick={handleClose}>
-      <Icon icon="chevron-left" iconSize={16} />
-      <Text style={{ color: "#0c0000", lineHeight: "14px" }} type={TextType.P1}>
-        Back
-      </Text>
-    </IconContainer>
-  );
+  return null;
 }
 
 export default CloseEditor;

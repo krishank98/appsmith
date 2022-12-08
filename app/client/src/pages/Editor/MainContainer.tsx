@@ -19,6 +19,7 @@ import { previewModeSelector } from "selectors/editorSelectors";
 import { routeChanged } from "actions/focusHistoryActions";
 import { getExplorerWidth } from "selectors/explorerSelector";
 import { AppsmithLocationState } from "utils/history";
+import SideNavbar from "pages/Editor/SideNavbar";
 
 const SentryRoute = Sentry.withSentryRouting(Route);
 
@@ -64,12 +65,18 @@ function MainContainer() {
   return (
     <>
       <Container className="relative w-full overflow-x-hidden">
+        <div className="flex flex-col h-full">
+          <SideNavbar />
+        </div>
         <EntityExplorerSidebar
           onDragEnd={onLeftSidebarDragEnd}
           onWidthChange={onLeftSidebarWidthChange}
           width={sidebarWidth}
         />
-        <div className="relative flex flex-col w-1/3 overflow-auto">
+        <div
+          className="relative flex flex-col w-1/3 overflow-auto"
+          style={{ borderRight: "1px solid #e8e8e8" }}
+        >
           <SentryRoute component={EditorsRouter} />
         </div>
         <div
