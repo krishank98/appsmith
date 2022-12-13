@@ -106,12 +106,8 @@ export const useDynamicAppLayout = () => {
     }
 
     // if explorer is closed or its preview mode, we don't need to subtract the EE width
-    if (
-      isExplorerPinned === true &&
-      !isPreviewMode &&
-      appMode === APP_MODE.EDIT
-    ) {
-      calculatedWidth -= explorerWidth;
+    if (!isPreviewMode && appMode === APP_MODE.EDIT) {
+      calculatedWidth -= 600 + 55;
     }
 
     switch (true) {

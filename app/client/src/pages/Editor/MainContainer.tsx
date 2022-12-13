@@ -74,13 +74,13 @@ function MainContainer() {
           width={sidebarWidth}
         />
         <div
-          className="relative flex flex-col w-1/3 overflow-auto"
+          className="relative flex flex-col overflow-auto w-[600px] min-w-[600px]"
           style={{ borderRight: "1px solid #e8e8e8" }}
         >
           <SentryRoute component={EditorsRouter} />
         </div>
         <div
-          className="relative flex flex-col w-2/3 overflow-auto"
+          className="relative flex flex-col w-full overflow-auto"
           id="app-body"
         >
           <SentryRoute component={WidgetsEditor} />
