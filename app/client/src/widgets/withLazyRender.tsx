@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import React from "react";
 import BaseWidget, { WidgetProps } from "./BaseWidget";
+import { useSelector } from "react-redux";
+import { AppState } from "ce/reducers";
 
 export function withLazyRender(Widget: typeof BaseWidget) {
   return function WrappedComponent(props: WidgetProps) {
-    const [deferRender, setDeferRender] = useState(true);
+    const isDragging = useSelector(
+      (state: AppState) => state.ui.widgetDragResize.isDragging,
+    );
+    const [deferRender, setDeferRender] = useState(!isDragging);
     const wrapperRef = useRef<HTMLDivElement>(null);
     let observer: IntersectionObserver;
 
