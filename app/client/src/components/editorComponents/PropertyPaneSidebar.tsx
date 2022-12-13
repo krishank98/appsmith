@@ -132,21 +132,21 @@ export const PropertyPaneSidebar = memo((props: Props) => {
         ref={sidebarRef}
       >
         {/* RESIZOR */}
-        {!isAppSettingsPaneOpen && (
-          <div
-            className={`absolute top-0 left-0 w-2 h-full -ml-1 group  cursor-ew-resize ${tailwindLayers.resizer}`}
-            onMouseDown={onMouseDown}
-            onTouchEnd={onMouseUp}
-            onTouchStart={onTouchStart}
-          >
-            <div
-              className={classNames({
-                "w-1 h-full ml-1 bg-transparent group-hover:bg-gray-300 transform transition": true,
-                "bg-gray-300": resizing,
-              })}
-            />
-          </div>
-        )}
+        {/*{!isAppSettingsPaneOpen && (*/}
+        {/*  <div*/}
+        {/*    className={`absolute top-0 left-0 w-2 h-full -ml-1 group  cursor-ew-resize ${tailwindLayers.resizer}`}*/}
+        {/*    onMouseDown={onMouseDown}*/}
+        {/*    onTouchEnd={onMouseUp}*/}
+        {/*    onTouchStart={onTouchStart}*/}
+        {/*  >*/}
+        {/*    <div*/}
+        {/*      className={classNames({*/}
+        {/*        "w-1 h-full ml-1 bg-transparent group-hover:bg-gray-300 transform transition": true,*/}
+        {/*        "bg-gray-300": resizing,*/}
+        {/*      })}*/}
+        {/*    />*/}
+        {/*  </div>*/}
+        {/*)}*/}
         <div
           className={classNames({
             "h-full p-0 overflow-y-auto min-w-72": true,

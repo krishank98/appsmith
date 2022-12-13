@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as Sentry from "@sentry/react";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useCallback, useEffect } from "react";
-import { Route, Switch, useLocation } from "react-router";
+import { Route, useLocation } from "react-router";
 
 import EditorsRouter from "./routes";
 import BottomBar from "./BottomBar";
@@ -83,7 +83,7 @@ function MainContainer() {
           className="relative flex flex-col w-full overflow-auto"
           id="app-body"
         >
-          <SentryRoute component={WidgetsEditor} />
+          <WidgetsEditor />
         </div>
       </Container>
       <BottomBar

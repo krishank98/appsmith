@@ -263,21 +263,6 @@ function JSEditorForm({ jsCollection: currentJSCollection }: Props) {
                 name={currentJSCollection.name}
                 pageId={pageId}
               />
-              <SearchSnippet
-                entityId={currentJSCollection?.id}
-                entityType={ENTITY_TYPE.JSACTION}
-                onClick={() => {
-                  dispatch(
-                    executeCommandAction({
-                      actionType: SlashCommand.NEW_SNIPPET,
-                      args: {
-                        entityId: currentJSCollection?.id,
-                        entityType: ENTITY_TYPE.JSACTION,
-                      },
-                    }),
-                  );
-                }}
-              />
               <JSFunctionRun
                 disabled={disableRunFunctionality || !isExecutePermitted}
                 isLoading={isExecutingCurrentJSAction}

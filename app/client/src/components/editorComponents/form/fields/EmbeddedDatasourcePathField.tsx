@@ -503,15 +503,6 @@ class EmbeddedDatasourcePathComponent extends React.Component<
             </Text>
           </CustomToolTip>
         )}
-        {displayValue && (
-          <StoreAsDatasource
-            datasourceId={
-              datasource && "id" in datasource ? datasource.id : undefined
-            }
-            enable
-            shouldSave={datasource && !("id" in datasource)}
-          />
-        )}
       </DatasourceContainer>
     );
   }

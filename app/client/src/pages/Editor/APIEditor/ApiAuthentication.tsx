@@ -107,11 +107,6 @@ function ApiAuthentication(props: Props): JSX.Element {
           ? createMessage(SAVE_DATASOURCE_MESSAGE)
           : createMessage(EDIT_DATASOURCE_MESSAGE)}
       </DescriptionText>
-      <StoreAsDatasource
-        datasourceId={datasourceId}
-        enable={isEnabled}
-        shouldSave={shouldSave}
-      />
     </AuthContainer>
   );
 }
