@@ -74,7 +74,11 @@ function MainContainer() {
           width={sidebarWidth}
         />
         <div
-          className="relative flex flex-col overflow-auto w-[600px] min-w-[600px]"
+          className={classNames({
+            "relative transition-all transform duration-400": true,
+            "translate-x-0 opacity-0": isPreviewMode,
+            "flex flex-col overflow-auto w-[600px] min-w-[600px] translate-x-600 opacity-100": !isPreviewMode,
+          })}
           style={{ borderRight: "1px solid #e8e8e8" }}
         >
           <SentryRoute component={EditorsRouter} />
