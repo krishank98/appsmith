@@ -72,9 +72,7 @@ function ContainerComponentWrapper(props: ContainerComponentProps) {
     <StyledContainerComponent
       {...props}
       className={`${
-        props.shouldScrollContents
-          ? getCanvasClassName() + " lazy-rendering-root"
-          : ""
+        props.shouldScrollContents ? getCanvasClassName() : ""
       } ${generateClassName(props.widgetId)}`}
       containerStyle={containerStyle}
       // Before you remove: generateClassName is used for bounding the resizables within this canvas
