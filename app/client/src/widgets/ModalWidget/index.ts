@@ -20,7 +20,6 @@ export const CONFIG = {
   iconSVG: IconSVG,
   needsMeta: true,
   isCanvas: true,
-  eagerLoad: true,
   features: {
     dynamicHeight: {
       sectionIndex: 0,

@@ -33,6 +33,8 @@ export function withLazyRender(Widget: typeof BaseWidget) {
         );
 
         observer.observe(wrapperRef.current);
+      } else {
+        setDeferRender(false);
       }
     }, []);
 
