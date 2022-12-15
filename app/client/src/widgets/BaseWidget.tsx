@@ -227,11 +227,14 @@ abstract class BaseWidget<
   /* eslint-disable @typescript-eslint/no-unused-vars */
   componentDidUpdate(prevProps: T) {
     if (this.props.deferRender !== prevProps.deferRender) {
-      this.deferredComponentDidRender?.();
+      this.deferredComponentDidRender();
     }
   }
 
   componentDidMount(): void {}
+
+  deferredComponentDidRender(): void {}
+
   /* eslint-enable @typescript-eslint/no-empty-function */
 
   getComponentDimensions = () => {
@@ -515,8 +518,6 @@ abstract class BaseWidget<
     resizeDisabled: false,
     disablePropertyPane: false,
   };
-
-  abstract deferredComponentDidRender(): void;
 }
 
 export interface BaseStyle {
