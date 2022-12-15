@@ -224,7 +224,6 @@ class JSONFormWidget extends BaseWidget<
 
   componentDidMount() {
     this.constructAndSaveSchemaIfRequired();
-    this.isWidgetMounting = false;
   }
 
   componentDidUpdate(prevProps: JSONFormWidgetProps) {
@@ -242,6 +241,10 @@ class JSONFormWidget extends BaseWidget<
       this.state.metaInternalFieldState,
       schema,
     );
+  }
+
+  deferredComponentDidRender() {
+    this.isWidgetMounting = false;
   }
 
   computeDynamicPropertyPathList = (schema: Schema) => {

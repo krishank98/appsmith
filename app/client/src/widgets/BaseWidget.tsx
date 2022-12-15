@@ -225,7 +225,11 @@ abstract class BaseWidget<
 
   /* eslint-disable @typescript-eslint/no-empty-function */
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  componentDidUpdate(prevProps: T) {}
+  componentDidUpdate(prevProps: T) {
+    if (this.props.deferRender !== prevProps.deferRender) {
+      this.deferredComponentDidRender?.();
+    }
+  }
 
   componentDidMount(): void {}
   /* eslint-enable @typescript-eslint/no-empty-function */
@@ -511,6 +515,8 @@ abstract class BaseWidget<
     resizeDisabled: false,
     disablePropertyPane: false,
   };
+
+  abstract deferredComponentDidRender(): void;
 }
 
 export interface BaseStyle {
