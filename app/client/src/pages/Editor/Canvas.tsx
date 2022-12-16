@@ -120,6 +120,8 @@ const Canvas = memo((props: CanvasProps) => {
         }}
         style={{
           width: canvasWidth,
+          transform: "scale(1)",
+          transformOrigin: "0 0",
         }}
       >
         {props.widgetsStructure.widgetId &&

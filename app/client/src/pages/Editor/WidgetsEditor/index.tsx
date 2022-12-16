@@ -133,7 +133,6 @@ function WidgetsEditor() {
                 <Debugger />
               </div>
             </div>
-            <PropertyPaneContainer />
           </div>
         </>
       )}

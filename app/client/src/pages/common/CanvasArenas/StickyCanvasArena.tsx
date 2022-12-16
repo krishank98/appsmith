@@ -59,9 +59,11 @@ export const StickyCanvasArena = forwardRef(
       }),
     );
     const { devicePixelRatio: scale = 1 } = window;
+    // scale = scale / 0.8;
 
     const repositionSliderCanvas = (entry: IntersectionObserverEntry) => {
-      stickyCanvasRef.current.style.width = entry.intersectionRect.width + "px";
+      stickyCanvasRef.current.style.width =
+        entry.intersectionRect.width / 1 + "px";
       stickyCanvasRef.current.style.position = "absolute";
       const calculatedLeftOffset =
         entry.intersectionRect.left - entry.boundingClientRect.left;
@@ -70,14 +72,19 @@ export const StickyCanvasArena = forwardRef(
       stickyCanvasRef.current.style.top = calculatedTopOffset + "px";
       stickyCanvasRef.current.style.left = calculatedLeftOffset + "px";
       stickyCanvasRef.current.style.height =
-        entry.intersectionRect.height + "px";
+        entry.intersectionRect.height / 1 + "px";
     };
 
     const rescaleSliderCanvas = (entry: IntersectionObserverEntry) => {
-      stickyCanvasRef.current.height = entry.intersectionRect.height * scale;
-      stickyCanvasRef.current.width = entry.intersectionRect.width * scale;
-      const canvasCtx: any = stickyCanvasRef.current.getContext("2d");
+      stickyCanvasRef.current.height =
+        (entry.intersectionRect.height * scale) / 1;
+      stickyCanvasRef.current.width =
+        (entry.intersectionRect.width * scale) / 1;
+      const canvasCtx: CanvasRenderingContext2D = stickyCanvasRef.current.getContext(
+        "2d",
+      );
       canvasCtx.scale(scale, scale);
+      // canvasCtx.transform(0.8, 0, 0, 0.8, 0, 0);
     };
 
     const updateCanvasStylesIntersection = (
