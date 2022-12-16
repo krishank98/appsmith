@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import React from "react";
 import BaseWidget, { WidgetProps } from "./BaseWidget";
+import { REQUEST_IDLE_CALLBACK_TIMEOUT } from "constants/AppConstants";
 
 export function withLazyRender(Widget: typeof BaseWidget) {
   return function WrappedComponent(props: WidgetProps) {
     const [deferRender, setDeferRender] = useState(true);
     const wrapperRef = useRef<HTMLDivElement>(null);
-    let observer: IntersectionObserver;
+
     useEffect(() => {
       if (wrapperRef.current && deferRender) {
-        observer = new IntersectionObserver(
+        const observer = new IntersectionObserver(
           (entries: IntersectionObserverEntry[]) => {
             if (!!entries.find((entry) => entry.isIntersecting)) {
               setDeferRender(false);
@@ -19,7 +20,7 @@ export function withLazyRender(Widget: typeof BaseWidget) {
                   setDeferRender(false);
                 },
                 {
-                  timeout: 1500,
+                  timeout: REQUEST_IDLE_CALLBACK_TIMEOUT,
                 },
               );
             }

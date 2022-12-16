@@ -97,7 +97,7 @@ export const CONFIG = {
   type: CanvasWidget.getWidgetType(),
   name: "Canvas",
   hideCard: true,
-  eagerLoad: true,
+  eagerRender: true,
   defaults: {
     rows: 0,
     columns: 0,
