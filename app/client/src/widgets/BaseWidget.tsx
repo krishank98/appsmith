@@ -226,7 +226,10 @@ abstract class BaseWidget<
   /* eslint-disable @typescript-eslint/no-empty-function */
   /* eslint-disable @typescript-eslint/no-unused-vars */
   componentDidUpdate(prevProps: T) {
-    if (this.props.deferRender !== prevProps.deferRender) {
+    if (
+      !this.props.deferRender &&
+      this.props.deferRender !== prevProps.deferRender
+    ) {
       this.deferredComponentDidRender();
     }
   }
