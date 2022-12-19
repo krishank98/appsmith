@@ -77,7 +77,7 @@ function CodeEditor(props: any) {
       handle = (window as any).requestIdleCallback(
         () => setEditorVisibility(true),
         {
-          timeout: REQUEST_IDLE_CALLBACK_TIMEOUT,
+          timeout: REQUEST_IDLE_CALLBACK_TIMEOUT.highPriority,
         },
       );
     }
