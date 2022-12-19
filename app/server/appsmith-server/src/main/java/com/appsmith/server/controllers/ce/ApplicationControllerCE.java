@@ -128,7 +128,6 @@ public class ApplicationControllerCE extends BaseController<ApplicationService, 
 
     @GetMapping("/releaseItems")
     public Mono<ResponseDTO<ReleaseItemsDTO>> getReleaseItemsInformation() {
-        log.debug("Going to get version release items");
         return applicationFetcher.getReleaseItems()
                    .map(applications -> new ResponseDTO<>(HttpStatus.OK.value(), applications, null));
     }
