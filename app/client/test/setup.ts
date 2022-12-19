@@ -1,6 +1,7 @@
 import { setupServer } from "msw/node";
 import { handlers } from "./__mocks__/apiHandlers";
 import "../src/polyfills/requestIdleCallback";
+
 export const server = setupServer(...handlers);
 
 window.scrollTo = jest.fn();

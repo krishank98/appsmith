@@ -181,6 +181,4 @@ export const PositionedContainer = React.forwardRef(
   },
 );
 
-export const PositionedContainerPadding = WIDGET_PADDING;
-
 export default PositionedContainer;

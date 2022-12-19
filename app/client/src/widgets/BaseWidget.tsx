@@ -18,9 +18,7 @@ import DraggableComponent from "components/editorComponents/DraggableComponent";
 import SnipeableComponent from "components/editorComponents/SnipeableComponent";
 import ResizableComponent from "components/editorComponents/ResizableComponent";
 import { ExecuteTriggerPayload } from "constants/AppsmithActionConstants/ActionConstants";
-import PositionedContainer, {
-  PositionedContainerPadding,
-} from "components/designSystems/appsmith/PositionedContainer";
+import PositionedContainer from "components/designSystems/appsmith/PositionedContainer";
 import WidgetNameComponent from "components/editorComponents/WidgetNameComponent";
 import shallowequal from "shallowequal";
 import { EditorContext } from "components/editorComponents/EditorContextProvider";
@@ -236,6 +234,10 @@ abstract class BaseWidget<
 
   componentDidMount(): void {}
 
+  /*
+   * Appsmith widget life cycle method that gets called
+   * when the deferred widget component renders.
+   */
   deferredComponentDidRender(): void {}
 
   /* eslint-enable @typescript-eslint/no-empty-function */
@@ -291,10 +293,7 @@ abstract class BaseWidget<
    */
   makeResizable(content: ReactNode) {
     return (
-      <ResizableComponent
-        {...this.props}
-        paddingOffset={PositionedContainerPadding}
-      >
+      <ResizableComponent {...this.props} paddingOffset={WIDGET_PADDING}>
         {content}
       </ResizableComponent>
     );
