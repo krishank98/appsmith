@@ -28,7 +28,6 @@ import {
 import { getCurrentThemeDetails } from "selectors/themeSelectors";
 import { BackgroundTheme, changeAppBackground } from "sagas/ThemeSaga";
 import { updateRecentEntitySaga } from "sagas/GlobalSearchSagas";
-import { Location } from "history";
 
 let previousPath: string;
 let previousHash: string | undefined;
@@ -46,7 +45,7 @@ function* handleRouteChange(
     yield call(logNavigationAnalytics, action.payload);
     yield call(contextSwitchingSaga, pathname, state, hash);
     yield call(appBackgroundHandler);
-    const entityInfo = identifyEntityFromPath(pathname, state, hash);
+    const entityInfo = identifyEntityFromPath(pathname, hash);
     yield fork(updateRecentEntitySaga, entityInfo);
   } catch (e) {
     log.error("Error in focus change", e);
@@ -313,6 +312,7 @@ function shouldStoreStateForCanvas(
     (currFocusEntity !== FocusEntity.CANVAS || prevPath !== currPath)
   );
 }
+
 export default function* rootSaga() {
   yield all([takeEvery(ReduxActionTypes.ROUTE_CHANGED, handleRouteChange)]);
   yield all([takeEvery(ReduxActionTypes.PAGE_CHANGED, handlePageChange)]);

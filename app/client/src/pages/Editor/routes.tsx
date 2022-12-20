@@ -28,6 +28,7 @@ import PerformanceTracker, {
   PerformanceTransactionName,
 } from "utils/PerformanceTracker";
 import * as Sentry from "@sentry/react";
+
 const SentryRoute = Sentry.withSentryRouting(Route);
 import { SaaSEditorRoutes } from "./SaaSEditor/routes";
 import { useWidgetSelection } from "utils/hooks/useWidgetSelection";
@@ -36,6 +37,7 @@ import history from "utils/history";
 import OnboardingChecklist from "./FirstTimeUserOnboarding/Checklist";
 import { getCurrentPageId } from "selectors/editorSelectors";
 import { DatasourceEditorRoutes } from "@appsmith/pages/routes";
+import PropertyPaneContainer from "pages/Editor/WidgetsEditor/PropertyPaneContainer";
 
 const Wrapper = styled.div<{ isVisible: boolean }>`
   position: absolute;
@@ -92,6 +94,7 @@ function EditorsRouter() {
     <Wrapper isVisible={isVisible} onClick={handleClose}>
       <PaneDrawer isVisible={isVisible} onClick={preventClose}>
         <Switch key={path}>
+          <SentryRoute component={PropertyPaneContainer} exact path={path} />
           <SentryRoute
             component={IntegrationEditor}
             exact
@@ -165,6 +168,7 @@ type PaneDrawerProps = {
   onClick: (e: React.MouseEvent) => void;
   children: ReactNode;
 };
+
 function PaneDrawer(props: PaneDrawerProps) {
   const showPropertyPane = useShowPropertyPane();
   const { focusWidget, selectWidget } = useWidgetSelection();

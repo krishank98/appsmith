@@ -77,7 +77,7 @@ function MainContainer() {
           className={classNames({
             "relative transition-all transform duration-400": true,
             "translate-x-0 opacity-0": isPreviewMode,
-            "flex flex-col overflow-auto w-[600px] min-w-[600px] translate-x-600 opacity-100": !isPreviewMode,
+            "flex flex-col overflow-auto w-[500px] min-w-[500px] translate-x-500 opacity-100": !isPreviewMode,
           })}
           style={{ borderRight: "1px solid #e8e8e8" }}
         >

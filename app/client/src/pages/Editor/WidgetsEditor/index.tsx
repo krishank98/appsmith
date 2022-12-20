@@ -27,7 +27,6 @@ import {
 } from "selectors/onboardingSelectors";
 import EditorContextProvider from "components/editorComponents/EditorContextProvider";
 import Guide from "../GuidedTour/Guide";
-import PropertyPaneContainer from "./PropertyPaneContainer";
 import CanvasTopSection from "./EmptyCanvasSection";
 import { useAutoHeightUIState } from "utils/hooks/autoHeightUIHooks";
 
