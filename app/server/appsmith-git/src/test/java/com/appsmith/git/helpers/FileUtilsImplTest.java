@@ -5,6 +5,7 @@ import com.appsmith.git.configurations.GitServiceConfig;
 import com.appsmith.git.service.GitExecutorImpl;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,8 @@ public class FileUtilsImplTest {
     @MockBean
     private GitExecutorImpl gitExecutor;
     private GitServiceConfig gitServiceConfig;
+    private static final String localTestDirectory = "localTestDirectory";
+    private static final Path localTestDirectoryPath = Path.of(localTestDirectory);
 
     @BeforeEach
     public void setUp() {
@@ -41,8 +44,10 @@ public class FileUtilsImplTest {
         fileUtils = new FileUtilsImpl(gitServiceConfig, gitExecutor);
     }
 
-    private static final String localTestDirectory = "localTestDirectory";
-    private static final Path localTestDirectoryPath = Path.of(localTestDirectory);
+    @AfterEach
+    public void tearDown() {
+        this.deleteLocalTestDirectoryPath();
+    }
 
     @Test
     public void saveApplicationRef_removeActionAndActionCollectionDirectoryCreatedInV1FileFormat_success() throws GitAPIException, IOException {
@@ -72,7 +77,7 @@ public class FileUtilsImplTest {
         Path pageDirectoryPath = localTestDirectoryPath.resolve(PAGE_DIRECTORY);
 
         // Create random page directories in the file system
-        Set<String> directorySet = new HashSet<String>() {
+        Set<String> directorySet = new HashSet<>() {
             {
                 add("Uneisean");
                 add("Keladia");
@@ -109,8 +114,6 @@ public class FileUtilsImplTest {
         } catch (IOException e) {
             Assertions.fail("Error while scanning directory");
         }
-
-        this.deleteLocalTestDirectoryPath();
     }
 
     @Test
@@ -118,7 +121,7 @@ public class FileUtilsImplTest {
         Path actionDirectoryPath = localTestDirectoryPath.resolve(ACTION_DIRECTORY);
 
         // Create random action files in the file system
-        Set<String> actionsSet = new HashSet<String>() {
+        Set<String> actionsSet = new HashSet<>() {
             {
                 add("uneisean.json");
                 add("keladia.json");
@@ -163,8 +166,6 @@ public class FileUtilsImplTest {
         } catch (IOException e) {
             Assertions.fail("Error while scanning directory");
         }
-
-        this.deleteLocalTestDirectoryPath();
     }
 
     /**
@@ -175,7 +176,7 @@ public class FileUtilsImplTest {
             try {
                 FileUtils.deleteDirectory(localTestDirectoryPath.toFile());
             } catch (IOException e) {
-
+                Assertions.fail("Error while deleting directory");
             }
         }
     }
