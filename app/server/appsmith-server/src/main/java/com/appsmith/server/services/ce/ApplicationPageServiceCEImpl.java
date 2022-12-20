@@ -48,6 +48,7 @@ import com.appsmith.server.solutions.PagePermission;
 import com.appsmith.server.solutions.WorkspacePermission;
 import com.google.common.base.Strings;
 import com.mongodb.client.result.UpdateResult;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
@@ -56,7 +57,6 @@ import org.springframework.util.StringUtils;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import jakarta.annotation.Nullable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
@@ -420,7 +420,7 @@ public class ApplicationPageServiceCEImpl implements ApplicationPageServiceCE {
                     GitApplicationMetadata gitData = application.getGitApplicationMetadata();
                     if (gitData != null && !StringUtils.isEmpty(gitData.getDefaultApplicationId()) && !StringUtils.isEmpty(gitData.getRepoName())) {
                         String repoName = gitData.getRepoName();
-                        Path repoPath = Paths.get(application.getOrganizationId(), gitData.getDefaultApplicationId(), repoName);
+                        Path repoPath = Paths.get(application.getWorkspaceId(), gitData.getDefaultApplicationId(), repoName);
                         // Delete git repo from local
                         return gitFileUtils.deleteLocalRepo(repoPath)
                                 .then(Mono.just(application));
