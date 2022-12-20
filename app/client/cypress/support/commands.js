@@ -743,10 +743,13 @@ Cypress.Commands.add("dragAndDropToCanvas", (widgetType, { x, y }) => {
   cy.get(selector)
     .trigger("dragstart", { force: true })
     .trigger("mousemove", x, y, { force: true });
+
+  const option = { eventConstructor: "MouseEvent" };
+
   cy.get(explorer.dropHere)
-    .trigger("mousemove", x, y, { eventConstructor: "MouseEvent", force: true })
-    .trigger("mousemove", x, y, { eventConstructor: "MouseEvent", force: true })
-    .trigger("mouseup", x, y, { eventConstructor: "MouseEvent", force: true });
+    .trigger("mousemove", x, y, option)
+    .trigger("mousemove", x, y, option)
+    .trigger("mouseup", x, y, option);
   cy.assertPageSave();
 });
 
