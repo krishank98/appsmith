@@ -1,4 +1,4 @@
-# Appsmith Docker Image
+# Appsmith Docker Image..
 
 The Appsmith Docker image is built with all the components required for it to run, within a single Docker container. Files in this directory make up for the scripts and template files needed for building the image.
 
